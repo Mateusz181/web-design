@@ -11,7 +11,6 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-
 }
 .navigation {
     display: flex;
@@ -66,4 +65,381 @@ body {
     color: red;
     font-family: Arial, Helvetica, sans-serif;
     
+}
+
+.contact-section {
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 24px 28px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+ 
+.contact-section h2 {
+    margin-bottom: 18px;
+    font-size: 24px;
+    text-align: left;
+}
+ 
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+ 
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+ 
+.form-row label {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+ 
+.form-row input,
+.form-row textarea {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid #b9c6ff;
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+}
+ 
+.form-row input:focus,
+.form-row textarea:focus {
+    border-color: #4d6fff;
+    box-shadow: 0 0 0 2px rgba(77, 111, 255, 0.2);
+}
+ 
+/* komunikaty błędów */
+.error {
+    font-size: 12px;
+    color: #e53935;
+    min-height: 16px;
+    margin-top: 3px;
+}
+ 
+/* przycisk wysyłania */
+#contact-form button {
+    margin-top: 6px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #4d6fff, #34a7ff);
+    color: #ffffff;
+    align-self: flex-start;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.15s ease;
+}
+ 
+#contact-form button:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+ 
+#contact-form button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.projects-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+}
+ 
+/* ---- FILTRY ---- */
+ 
+.projects-filter {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+ 
+.filter-btn {
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 2px solid #4d6fff;
+    background: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+ 
+.filter-btn:hover {
+    background: #4d6fff;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+ 
+.filter-btn.active {
+    background: #4d6fff;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+ 
+/* ---- GRID ---- */
+ 
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+}
+ 
+/* ---- KARTY ---- */
+ 
+.project-card {
+    background: #f3f6ff;
+    padding: 18px 20px;
+    border-radius: 18px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+ 
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+}
+ 
+.project-card h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+    color: #223;
+}
+ 
+.project-card p {
+    font-size: 14px;
+    line-height: 1.45;
+    color: #333;
+}
+ 
+/* Żeby nie przyklejało się do lewej */
+.profile-section, .projects-section {
+    text-align: center;
+}
+ 
+.projects-grid {
+    text-align: left;
+}
+body {
+    transition: background 0.4s ease, color 0.4s ease;
+}
+ 
+/* jasny motyw */
+body.light-theme {
+    background: linear-gradient(135deg, #79caff, #1b6fd3);
+    color: #000;
+}
+ 
+/* ciemny motyw */
+body.dark-theme {
+    background: radial-gradient(circle at top, #1f2937, #020617);
+    color: #f2f2f2;
+}
+ 
+/* dopasowanie elementów do ciemnego motywu */
+body.dark-theme .nav-button {
+    background: #111827;
+    color: #fff;
+    border-color: #4b5563;
+}
+ 
+body.dark-theme .projects-section,
+body.dark-theme .contact-section {
+    background: rgba(15, 23, 42, 0.94);
+    color: #e5e7eb;
+}
+ 
+body.dark-theme .project-card {
+    background: #020617;
+    color: #e5e7eb;
+}
+ 
+/* ---------- PRZEŁĄCZNIK ---------- */
+ 
+#theme-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: #ffffff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    z-index: 999;
+}
+ 
+#theme-toggle:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+ 
+body.dark-theme #theme-toggle {
+    background: #111827;
+    color: #fff;
+}
+.slider-section {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    position: relative;
+}
+ 
+.slider {
+    width: 100%;
+    height: 330px;
+    overflow: hidden;
+    border-radius: 16px;
+    position: relative;
+}
+ 
+.slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+ 
+.slide.active {
+    opacity: 1;
+}
+ 
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+ 
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.85);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: 0.2s;
+}
+ 
+.slider-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.07);
+}
+ 
+.prev { left: -15px; }
+.next { right: -15px; }
+ 
+.dots {
+    margin-top: 15px;
+    text-align: center;
+}
+ 
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    border-radius: 50%;
+    background: #bbb;
+    cursor: pointer;
+    transition: 0.2s;
+}
+ 
+.dot.active {
+    background: #4d6fff;
+    transform: scale(1.25);
+}
+.typewriter {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    min-height: 1.4em; /* żeby nic nie skakało */
+}
+ 
+.cursor {
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 0.7s steps(1) infinite;
+}
+ 
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+}
+.weather-widget {
+    position: fixed;
+    top: 80px;          /* trochę pod przyciskiem motywu */
+    right: 18px;
+    min-width: 210px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    font-size: 13px;
+    z-index: 900;
+}
+ 
+.weather-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+ 
+.weather-icon {
+    font-size: 20px;
+}
+ 
+.weather-info {
+    display: flex;
+    flex-direction: column;
+}
+ 
+.weather-city {
+    font-weight: 700;
+}
+ 
+.weather-desc {
+    font-size: 12px;
+}
+ 
+.weather-temp {
+    margin-left: auto;
+    font-weight: 700;
+    font-size: 16px;
+}
+ 
+.weather-status {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #555;
+}
+ 
+/* wersja w ciemnym motywie */
+body.dark-theme .weather-widget {
+    background: #111827;
+    color: #e5e7eb;
+}
+ 
+body.dark-theme .weather-status {
+    color: #9ca3af;
 }

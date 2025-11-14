@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="theme-toggle">🌙</button>
     <main class="profile--section">
         <div class="profile-contener">
             <img src="man-8548692_640.jpg" alt="Zdjęcie profilowe" class="profile-image">
@@ -19,5 +20,29 @@
         <a href="kontakt.html" class="nav-button">Kontakt</a>
          <a href="projekty.html" class="nav-button">Projekty</a>
     </nav>
+    <script>
+    (function () {
+        const toggleBtn = document.getElementById('theme-toggle');
+ 
+        // ustaw motyw z localStorage albo domyślny
+        const saved = localStorage.getItem('theme') || 'light-theme';
+        applyTheme(saved);
+ 
+        toggleBtn.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-theme')
+                ? 'light-theme'
+                : 'dark-theme';
+ 
+            applyTheme(newTheme);
+        });
+ 
+        function applyTheme(theme) {
+            document.body.classList.remove('light-theme', 'dark-theme');
+            document.body.classList.add(theme);
+            localStorage.setItem('theme', theme);
+            toggleBtn.textContent = theme === 'dark-theme' ? '☀️' : '🌙';
+        }
+    })();
+</script>
 </html>
 </body> 

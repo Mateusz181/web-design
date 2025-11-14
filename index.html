@@ -7,16 +7,261 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="theme-toggle">🌙</button>
     <main class="profile--section">
         <div class="profile-contener">
             <img src="man-8548692_640.jpg" alt="Zdjęcie profilowe" class="profile-image">
             <h1 class="profile-name">Mateusz Kotula</h1>
+            <h2 class="typewriter">
+    <span id="typewriter-text"></span><span class="cursor">|</span>
+</h2>
+<button id="theme-toggle">🌙</button>
+ 
+<!-- WIDGET POGODY -->
+<div id="weather-widget" class="weather-widget">
+    <div class="weather-row">
+        <span class="weather-icon">⛅</span>
+        <div class="weather-info">
+            <span class="weather-city">Ładowanie pogody...</span>
+            <span class="weather-desc"></span>
         </div>
+        <span class="weather-temp"></span>
+    </div>
+    <div class="weather-status"></div>
+</div>
+        </div>
+        
     </main>
     <nav class="navigation">
         <a href="o-mnie.html" class="nav-button">O mnie</a>
         <a href="kontakt.html" class="nav-button">Kontakt</a>
         <a href="projekty.html" class="nav-button">Projekty</a>
         </nav>
+
+</script>
+<script>
+    function updateFooterTime() {
+  const now = new Date();
+ 
+  const dd = String(now.getDate()).padStart(2, "0");
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const yyyy = now.getFullYear();
+ 
+  const hh = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+  const ss = String(now.getSeconds()).padStart(2, "0");
+ 
+  const text = `Dziś jest: ${dd}.${mm}.${yyyy}, godzina: ${hh}:${min}:${ss}`;
+ 
+  const element = document.getElementById("current-time");
+  if (element) {
+    element.textContent = text;
+  }
+}
+ 
+updateFooterTime();
+setInterval(updateFooterTime, 1000);
+</script>
+<footer>
+    <p id="visit-counter"></p>
+  </footer>
+ 
+  <script>
+    const STORAGE_KEY = 'visitCount';
+    let count = Number(localStorage.getItem(STORAGE_KEY)) || 0;
+ 
+    count += 1;
+    localStorage.setItem(STORAGE_KEY, count);
+ 
+    const counterElement = document.getElementById('visit-counter');
+ 
+    if (count === 1) {
+      counterElement.textContent = 'Witaj po raz pierwszy!';
+    } else {
+      counterElement.textContent = `To jest Twoja ${count} wizyta na tej stronie!`;
+    }
+  </script>
+  <button id="btn-top">⬆️</button>
+ 
+<script>
+    const btn = document.getElementById("btn-top");
+ 
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    });
+ 
+    btn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>
+ 
+<style>
+    #btn-top {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 55px;
+        height: 55px;
+        border: none;
+        border-radius: 50%;
+        background: #4d6fff;
+        color: white;
+        font-size: 28px;
+        cursor: pointer;
+        display: none;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        transition: transform 0.1s ease;
+    }
+ 
+    #btn-top:hover {
+        transform: scale(1.07);
+    }
+ 
+    body {
+        min-height: 1500px; /* żeby działało na małej stronie */
+    }
+</style>
+<script>
+    (function () {
+        const toggleBtn = document.getElementById('theme-toggle');
+ 
+        // ustaw motyw z localStorage albo domyślny
+        const saved = localStorage.getItem('theme') || 'light-theme';
+        applyTheme(saved);
+ 
+        toggleBtn.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-theme')
+                ? 'light-theme'
+                : 'dark-theme';
+ 
+            applyTheme(newTheme);
+        });
+ 
+        function applyTheme(theme) {
+            document.body.classList.remove('light-theme', 'dark-theme');
+            document.body.classList.add(theme);
+            localStorage.setItem('theme', theme);
+            toggleBtn.textContent = theme === 'dark-theme' ? '☀️' : '🌙';
+        }
+    })();
+</script>
+<script>
+    const texts = [
+        "Tworzę strony internetowe.",
+        "Uczę się JavaScriptu.",
+        "Buduję swoje portfolio."
+    ];
+ 
+    const textElement = document.getElementById("typewriter-text");
+ 
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+ 
+    const typingSpeed = 100;   // szybkość pisania (ms / znak)
+    const deletingSpeed = 60;  // szybkość kasowania
+    const endPause = 2000;     // pauza po napisaniu całego tekstu
+    const startPause = 800;    // pauza przed kolejnym tekstem
+ 
+    function type() {
+        const currentText = texts[textIndex];
+ 
+        if (!isDeleting) {
+            // pisanie
+            charIndex++;
+            textElement.textContent = currentText.slice(0, charIndex);
+ 
+            if (charIndex === currentText.length) {
+                // cały tekst napisany – czekamy 2 sekundy i zaczynamy kasować
+                isDeleting = true;
+                setTimeout(type, endPause);
+                return;
+            }
+ 
+            setTimeout(type, typingSpeed);
+        } else {
+            // kasowanie
+            charIndex--;
+            textElement.textContent = currentText.slice(0, charIndex);
+ 
+            if (charIndex === 0) {
+                // skończyliśmy kasować – kolejny tekst
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(type, startPause);
+                return;
+            }
+ 
+            setTimeout(type, deletingSpeed);
+        }
+    }
+ 
+    // start po załadowaniu strony
+    document.addEventListener("DOMContentLoaded", () => {
+        type();
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cityElement = document.querySelector(".weather-city");
+        const descElement = document.querySelector(".weather-desc");
+        const tempElement = document.querySelector(".weather-temp");
+        const iconElement = document.querySelector(".weather-icon");
+        const statusElement = document.querySelector(".weather-status");
+ 
+        // "Twoja lokalizacja" – wpisz swoje miasto, np. Rzeszow, Krakow itd.
+        const city = "Rzeszow";
+        const url = `https://wttr.in/${city}?format=%l|%C|%t`;
+ 
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("HTTP " + response.status);
+                }
+                return response.text();
+            })
+            .then(text => {
+                const parts = text.trim().split("|");
+                const location = parts[0] || city;
+                const condition = parts[1] || "Brak danych";
+                const temperature = parts[2] || "";
+ 
+                cityElement.textContent = location;
+                descElement.textContent = condition;
+                tempElement.textContent = temperature;
+                iconElement.textContent = pickWeatherEmoji(condition);
+ 
+                statusElement.textContent = "Aktualna pogoda";
+            })
+            .catch(err => {
+                cityElement.textContent = city;
+                descElement.textContent = "";
+                tempElement.textContent = "";
+                iconElement.textContent = "⚠️";
+                statusElement.textContent = "Brak danych pogodowych";
+                console.error("Błąd pobierania pogody:", err);
+            });
+    });
+ 
+    function pickWeatherEmoji(condition) {
+        const c = (condition || "").toLowerCase();
+ 
+        if (c.includes("sun") || c.includes("clear")) return "☀️";
+        if (c.includes("cloud")) return "☁️";
+        if (c.includes("rain") || c.includes("drizzle")) return "🌧️";
+        if (c.includes("storm") || c.includes("thunder")) return "⛈️";
+        if (c.includes("snow") || c.includes("sleet")) return "❄️";
+        if (c.includes("fog") || c.includes("mist")) return "🌫️";
+ 
+        return "⛅"; // domyślna ikonka
+    }
+</script>
 </html>
 </body>

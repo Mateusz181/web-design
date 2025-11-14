@@ -7,18 +7,80 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="profile--section">
+ <button id="theme-toggle">🌙</button>
+    <main class="profile-section">
         <div class="profile-contener">
             <img src="man-8548692_640.jpg" alt="Zdjęcie profilowe" class="profile-image">
             <h1 class="profile-name">Mateusz Kotula</h1>
-            <h2>Telefon: 238 948 201 <br><br>
-                Gmail: Ktośniewiem@gmail.com </h2>
+            <h2>
+                Telefon: 238 948 201 <br><br>
+                Gmail: ktosniewiem@gmail.com
+            </h2>
         </div>
+        <section class="contact-section">
+            <h2>Formularz kontaktowy</h2>
+ 
+            <form id="contact-form" novalidate>
+                <div class="form-row">
+                    <label for="name">Imię:</label>
+                    <input type="text" id="name" name="name">
+                    <p class="error" id="name-error"></p>
+                </div>
+ 
+                <div class="form-row">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email">
+                    <p class="error" id="email-error"></p>
+                </div>
+ 
+                <div class="form-row">
+                    <label for="message">Wiadomość:</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                    <p class="error" id="message-error"></p>
+                </div>
+ 
+                <button type="submit">Wyślij</button>
+            </form>
+        </section>
     </main>
+ 
     <nav class="navigation">
         <a href="index.html" class="nav-button">Strona główna</a>
         <a href="o-mnie.html" class="nav-button">O mnie</a>
-         <a href="projekty.html" class="nav-button">Projekty</a>
+        <a href="projekty.html" class="nav-button">Projekty</a>
+        <a href="kontakt.html" class="nav-button">Kontakt</a>
     </nav>
-</html>
+ 
+    <script>
+        const form = document.getElementById('contact-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+ 
+        const nameError = document.getElementById('name-error');
+
+    (function () {
+        const toggleBtn = document.getElementById('theme-toggle');
+ 
+        // ustaw motyw z localStorage albo domyślny
+        const saved = localStorage.getItem('theme') || 'light-theme';
+        applyTheme(saved);
+ 
+        toggleBtn.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-theme')
+                ? 'light-theme'
+                : 'dark-theme';
+ 
+            applyTheme(newTheme);
+        });
+ 
+        function applyTheme(theme) {
+            document.body.classList.remove('light-theme', 'dark-theme');
+            document.body.classList.add(theme);
+            localStorage.setItem('theme', theme);
+            toggleBtn.textContent = theme === 'dark-theme' ? '☀️' : '🌙';
+        }
+    })();
+</script>
 </body>
+</html>
